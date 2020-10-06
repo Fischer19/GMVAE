@@ -1,4 +1,5 @@
 import torch
+import pickle
 class newsgroupDataset(torch.utils.data.Dataset):
     """Face Landmarks dataset."""
 
@@ -6,7 +7,7 @@ class newsgroupDataset(torch.utils.data.Dataset):
         self.root_dir = root_dir
         self.transform = transform
         self.train = train
-        if self.trian:
+        if self.train:
             with open(root_dir, "rb") as f:
                 dic = pickle.load(f)
                 self.X = dic["X"][:12000]
