@@ -1,4 +1,5 @@
-class newsgroupDataset(Dataset):
+import torch
+class newsgroupDataset(torch.utils.data.Dataset):
     """Face Landmarks dataset."""
 
     def __init__(self, root_dir, transform=None, train = True):
