@@ -18,6 +18,7 @@ from torchvision import datasets, transforms
 from torch.utils.data.sampler import SubsetRandomSampler
 import torch.utils.data
 from model.GMVAE import *
+from datasets import newsgroupDataset
 
 #########################################################
 ## Input Parameters
@@ -29,7 +30,7 @@ parser.add_argument('-f', '--file',
                     help='Path for input file. First line should contain number of lines to search in')
 
 ## Dataset
-parser.add_argument('--dataset', type=str, choices=['mnist'],
+parser.add_argument('--dataset', type=str, choices=['mnist', '20news'],
                     default='mnist', help='dataset (default: mnist)')
 parser.add_argument('--seed', type=int, default=0, help='random seed (default: 0)')
 
@@ -114,6 +115,13 @@ if args.dataset == "mnist":
   # Download or load downloaded MNIST dataset
   train_dataset = datasets.MNIST('./mnist', train=True, download=True, transform=transforms.ToTensor())
   test_dataset = datasets.MNIST('./mnist', train=False, transform=transforms.ToTensor())
+
+if args.dataset == "20news":
+  print("Loading 20news dataset...")
+  # Download or load downloaded MNIST dataset
+  train_dataset = newsgroupDataset("tfidf_embedding.pk", train = True)
+  test_dataset = newsgroupDataset("tfidf_embedding.pk", train = False)
+
 
 
 #########################################################
